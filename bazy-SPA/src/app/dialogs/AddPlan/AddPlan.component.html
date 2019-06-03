@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <span>Dodaj dietetyka</span>
+      <span class="example-spacer"></span>
+      <button mat-mini-fab color="warn" (click) ="onClose()"><mat-icon>close</mat-icon></button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+      <form [formGroup]="myForm" (submit)="Add(myForm)" class="text-center border border-light flex p-4 w-100 cloudy-knoxville-gradient" >
+          <div class="inputs">
+            <mat-form-field color="text-primary">
+              <mat-label>Wybierz dietetyka</mat-label>
+              <mat-select name="Dietetyk" formControlName="imieDietetyk">
+                <mat-option *ngFor="let dietetyk of dietetycy" [value]="dietetyk.imie" (click)="GetDieteicSurName(myForm, dietetyk.nazwisko)">{{dietetyk.imie + " " + dietetyk.nazwisko}}</mat-option>
+              </mat-select>
+              <mat-icon matSuffix class="mat-primary">group</mat-icon>
+              <mat-error> Dietetyk is <strong>required</strong></mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="text-primary">
+              <mat-label>Wybierz osobę</mat-label>
+              <mat-select name="Pacjent" formControlName="imiePacjent"  >
+                <mat-option *ngFor="let pacjent of osoby" [value]="pacjent.imie" (click)="GetPersonSurName(myForm,pacjent.nazwisko)" >{{pacjent.imie + ' ' + pacjent.nazwisko}} </mat-option>
+              </mat-select>
+              <mat-icon matSuffix class="mat-primary">group</mat-icon>
+              <mat-error> Osoba is <strong>required</strong></mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput name="kalorycznosc" type="number" formControlName="kalorycznosc">
+              <mat-error> Kalorycznosc is <strong>required</strong></mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp3" placeholder="Data stworzenia" type="datetime" formControlName="data_stworzenia">
+              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+              <mat-error> Data is <strong>required</strong></mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp2" placeholder="Data wyslania"  formControlName="data_wyslania" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+              <mat-error> Data is <strong>required</strong></mat-error>
+            </mat-form-field>
+          </div>
+            <div class="main-buttons">
+              <button mat-raised-button class="text-white w-25 mat-primary" [disabled]="!myForm.valid"  id="submitButton" type="submit"><mat-icon class="mr-1">person_add</mat-icon>Submit</button>
+            </div>
+
+  </form>

@@ -1,0 +1,51 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <span>Edycja planu</span>
+      <span class="example-spacer"></span>
+      <button mat-mini-fab color="warn" (click) ="onClose()"><mat-icon>close</mat-icon></button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+      <form [formGroup]="myForm" (submit)="Update(myForm)"class="text-center border border-light flex p-4 w-100 cloudy-knoxville-gradient" >
+          <div class="inputs">
+              <mat-form-field>
+                  <input matInput name="Id" type="number" formControlName="Id">
+                </mat-form-field>
+
+            <mat-form-field color="text-primary">
+              <mat-label>Wybierz dietetyka</mat-label>
+              <mat-select name="Dietetyk" formControlName="imieDietetyk">
+                <mat-option *ngFor="let dietetyk of dietetycy" [value]="dietetyk.imie" (click)="GetPersonSurName(myForm,dietetyk.nazwisko)">{{dietetyk.imie + " " + dietetyk.nazwisko}}</mat-option>
+              </mat-select>
+              <mat-icon matSuffix class="mat-primary">group</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field color="text-primary">
+              <mat-label>Wybierz pacjenta</mat-label>
+              <mat-select name="Pacjent" formControlName="imiePacjent">
+                <mat-option *ngFor="let plan of plany" [value]="plan.imiePacjent" (click)="GetPersonSurNamePacjent(myForm, plan.nazwiskoPacjent)">{{plan.imiePacjent + " " + plan.nazwiskoPacjent}}</mat-option>
+              </mat-select>
+              <mat-icon matSuffix class="mat-primary">group</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput name="kalorycznosc" type="number" formControlName="kalorycznosc">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp3" placeholder="Data stworzenia" type="datetime" formControlName="data_stworzenia" [value]="plan.data_stworzenia">
+              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp2" placeholder="Input disabled"  formControlName="data_wyslania" disabled [value]="plan.data_wyslania">
+              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+            <div class="main-buttons">
+              <button mat-raised-button class="text-white w-25 mat-primary" [disabled]="!myForm.valid"  id="submitButton" type="submit"><mat-icon class="mr-1">person_add</mat-icon>Submit</button>
+            </div>
+
+  </form>

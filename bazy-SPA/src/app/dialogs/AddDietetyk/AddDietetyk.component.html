@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Dodaj dietetyka</span>
+        <span class="example-spacer"></span>
+        <button mat-mini-fab color="warn" (click) ="onClose()"><mat-icon>close</mat-icon></button>
+  
+      </mat-toolbar-row>
+    </mat-toolbar>
+        <form [formGroup]="myForm" (submit)="Add(myForm)"class="text-center border border-light flex p-4 w-100 cloudy-knoxville-gradient" >
+            <div class="inputs">
+                <mat-form-field>
+                <input matInput placeholder="Imie" name="Imie" type="text" formControlName="Imie">
+                <mat-icon matSuffix class="mat-primary">person</mat-icon>
+                <mat-error> Imie is <strong>required</strong></mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Nazwisko" name="Nazwisko" type="text" formControlName="Nazwisko">
+                <mat-icon matSuffix class="mat-primary">verified_user</mat-icon>
+                <mat-error> Nazwisko is <strong>required</strong></mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Telefon" name="Telefon" type="text" formControlName="Telefon">
+                <mat-icon matSuffix class="mat-primary">lock</mat-icon>
+                <mat-error> Telefon is <strong>required</strong></mat-error>
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input matInput placeholder="Mail" name="Mail" type="text" formControlName="Mail" >
+                <mat-error *ngIf="!myForm.controls.Mail.hasError('required')">
+                    Please enter a valid email addres
+                  </mat-error>
+                  <mat-error *ngIf="!myForm.controls.Mail.hasError('email')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                <mat-icon matSuffix class="mat-primary">lock</mat-icon>
+               
+              </mat-form-field>
+            </div>
+              <div class="main-buttons">
+                <button mat-raised-button class="text-white w-25 mat-primary" [disabled]="!myForm.valid"  id="submitButton" type="submit"><mat-icon class="mr-1">person_add</mat-icon>Submit</button>
+              </div>
+  
+    </form>

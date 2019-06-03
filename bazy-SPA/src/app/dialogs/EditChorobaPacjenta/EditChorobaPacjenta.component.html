@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <span>Edycja choroby</span>
+      <span class="example-spacer"></span>
+      <button mat-mini-fab color="warn" (click) ="onClose()"><mat-icon>close</mat-icon></button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+      <form [formGroup]="myForm" (submit)="Update(myForm)"class="text-center border border-light flex p-4 w-100 cloudy-knoxville-gradient" >
+          <div class="inputs">
+              <mat-form-field>
+                  <input matInput name="Id" type="number" formControlName="Id">
+                </mat-form-field>
+
+            <mat-form-field color="text-primary">
+              <mat-label>Wybierz chorobę</mat-label>
+              <mat-select name="choroba" formControlName="Choroba">
+                <mat-option *ngFor="let team of teams" [value]="team.choroba">{{team.choroba}}</mat-option>
+              </mat-select>
+              <mat-icon matSuffix class="mat-primary">group</mat-icon>
+            </mat-form-field>
+
+          </div>
+            <div class="main-buttons">
+              <button mat-raised-button class="text-white w-25 mat-primary" [disabled]="!myForm.valid"  id="submitButton" type="submit"><mat-icon class="mr-1">person_add</mat-icon>Submit</button>
+            </div>
+
+  </form>
